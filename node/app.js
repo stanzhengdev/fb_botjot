@@ -23,6 +23,8 @@ app.set("view engine", "ejs");
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(express.static("public"));
 
+var handlers = require("./handlers/index.js");
+
 /*
  * Be sure to setup your config values before running this code. You can
  * set them using environment variables or modifying the config file in /config.
@@ -274,7 +276,7 @@ function receivedMessage(event) {
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
     switch (messageText) {
-      case "image":
+      /*case "image":
         sendImageMessage(senderID);
         break;
 
@@ -325,8 +327,10 @@ function receivedMessage(event) {
       case "account linking":
         sendAccountLinking(senderID);
         break;
+      */
       default:
-        sendTextMessage(senderID, messageText + "?");
+        let req = new Promise((res, rej) => res(handlers.text(messageText)));
+        req.then(body => sendTextMessage(senderID, body));
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
