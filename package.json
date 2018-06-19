@@ -32,7 +32,9 @@
     "win-deploy": "aws cloudformation deploy --template-file packaged-sam.yaml --stack-name %npm_package_config_cloudFormationStackName% --capabilities CAPABILITY_IAM --region %npm_package_config_region%",
     "win-package-deploy": "npm run win-package && npm run win-deploy",
     "win-delete-stack": "aws cloudformation delete-stack --stack-name %npm_package_config_cloudFormationStackName% --region %npm_package_config_region%",
-    "win-setup": "npm install && (aws s3api get-bucket-location --bucket %npm_package_config_s3BucketName% --region %npm_package_config_region% || npm run win-create-bucket) && npm run win-package-deploy"
+    "win-setup": "npm install && (aws s3api get-bucket-location --bucket %npm_package_config_s3BucketName% --region %npm_package_config_region% || npm run win-create-bucket) && npm run win-package-deploy",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -49,10 +51,12 @@
     "express": "^4.13.4",
     "install": "^0.8.8",
     "minimist": "^1.2.0",
-    "npm": "^4.4.4",
-    "request": "^2.72.0"
+    "npm": "^5.5.0",
+    "request": "^2.72.0",
+    "snyk": "^1.83.0"
   },
   "engines": {
     "node": "~4.1.2"
-  }
+  },
+  "snyk": true
 }
