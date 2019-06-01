@@ -42,7 +42,7 @@
   "license": "ISC",
   "dependencies": {
     "aws-serverless-express": "^2.2.0",
-    "axios": "^0.16.0",
+    "axios": "^0.19.0",
     "body-parser": "^1.15.0",
     "config": "^1.20.4",
     "ejs": "^2.4.2",
